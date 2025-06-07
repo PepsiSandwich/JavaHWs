@@ -2,14 +2,14 @@ package edu.phystech.hw2.analyzer;
 
 public class TooLongTextAnalyzer implements TextAnalyzer {
 
-    private final int maxLen;
+    private final int maxLength;
 
-    public TooLongTextAnalyzer(int maxLen) {
-        this.maxLen = maxLen;
+    public TooLongTextAnalyzer(int maxLength) {
+        this.maxLength = maxLength;
     }
 
     @Override
     public Label processText(String text) {
-        return null;
+        return text.length() > maxLength ? Label.TOO_LONG : Label.OK;
     }
 }

@@ -10,3 +10,4 @@ public class InvalidContactFieldException extends RuntimeException {
     InvalidContactFieldException(String fieldName) {
     }
 }
+// сделал влооженным классом, вроде работает

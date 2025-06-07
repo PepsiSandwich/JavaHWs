@@ -6,15 +6,22 @@ import java.util.function.Function;
 
 public class Functional {
 
-    public static <T, R> List<R> map(List<T> collection, Function<T, R> function) {
-        return null;
+    public static <T, R> List<R> map(List<T> list, Function<? super T, ? extends R> func) {
+        List<R> result = new ArrayList<>(list.size());
+        for (T item : list) {
+            result.add(func.apply(item));
+        }
+        return result;
     }
 
-    public static <T, R> T reduce(List<T> collection, BinaryOperator<T> operator, T identity) {
-        return null;
+    public static <T, R> R reduce(List<T> list, BiFunction<R, ? super T, R> func, R initial) {
+        R result = initial;
+        for (T item : list) {
+            result = func.apply(result, item);
+        }
+        return result;
     }
 }
-
 
 
 

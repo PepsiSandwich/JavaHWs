@@ -1,6 +1,5 @@
 package edu.phystech.hw2;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BinaryOperator;
@@ -15,7 +14,7 @@ import org.junit.jupiter.api.Assertions;
 class ToUpperCaseOperator implements UnaryOperator<String> {
     @Override
     public String apply(String s) {
-        return s;
+        return s.toUpperCase();
     }
 }
 
@@ -23,8 +22,10 @@ class ToUpperCaseOperator implements UnaryOperator<String> {
 class AbsMaxOperator implements BinaryOperator<Integer> {
 
     @Override
-    public Integer apply(Integer integer, Integer integer2) {
-        return 0;
+    public Integer apply(Integer a, Integer b) {
+        int absA = Math.abs(a);
+        int absB = Math.abs(b);
+        return absA >= absB ? a : b;
     }
 }
 
@@ -32,28 +33,35 @@ class StringLengthMoreThan5 implements Predicate<String> {
 
     @Override
     public boolean test(String s) {
-        return true;
+        return s.length() > 5;
     }
 }
 
-
-// Проверяет, является ли число квадратом
+// Проверяет, является ли число квадратом целого числа
 class IsNumberASquareOfAnotherNumber implements Predicate<Integer> {
 
     @Override
     public boolean test(Integer integer) {
-        return true;
+        if (integer == null || integer < 0) return false;
+        int sqrt = (int) Math.sqrt(integer);
+        return sqrt * sqrt == integer;
     }
 }
 
-// Возвращает четные числа, начиная с from включительно, если в from нечетное число, то начиная с первого четного с from
+// Возвращает четные числа, начиная с from включительно, если from нечетное - начиная с первого четного >= from
 class EvenNumberSupplier implements Supplier<Integer> {
 
-    public EvenNumberSupplier(int from) {}
+    private int current;
+
+    public EvenNumberSupplier(int from) {
+        current = (from % 2 == 0) ? from : from + 1;
+    }
 
     @Override
     public Integer get() {
-        return 0;
+        int ret = current;
+        current += 2;
+        return ret;
     }
 }
 

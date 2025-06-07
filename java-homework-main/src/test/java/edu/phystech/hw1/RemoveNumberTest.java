@@ -8,7 +8,20 @@ import org.junit.jupiter.api.Assertions;
 public class RemoveNumberTest {
 
     private static int[] removeElement(int[] input, int element) {
-        return input;
+        int count = 0;
+        for (int num : input) {
+            if (num == element) {
+                count++;
+            }
+        }
+        int[] result = new int[input.length - count];
+        int idx = 0;
+        for (int num : input) {
+            if (num != element) {
+                result[idx++] = num;
+            }
+        }
+        return result;
     }
 
     @Test
